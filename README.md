@@ -15,7 +15,7 @@ A comprehensive application for managing schedules, notifications, and user stat
 
 ---
 
-## 🖥 Backend (`backend/`)
+## Backend (`backend/`)
 
 The backend handles data persistence, authentication, and AI processing.
 
@@ -30,7 +30,7 @@ The backend handles data persistence, authentication, and AI processing.
     - **`routes.py`**: Contains all API endpoints (e.g., `/login`, `/register`, `/schedule`, `/invite`).
     - **`ai_service.py`**: Integrates with Google Gemini to parse schedule images uploaded by users.
 
-## 🌐 Frontend (`frontend/`)
+## Frontend (`frontend/`)
 
 The web interface for the application.
 
@@ -40,7 +40,7 @@ The web interface for the application.
     - Dashboard to view friends' status (Free/In Class).
     - Schedule management.
 
-## 📱 Mobile (`mobile/`)
+## Mobile (`mobile/`)
 
 The mobile interface, optimized for iOS and Android.
 
@@ -52,7 +52,7 @@ The mobile interface, optimized for iOS and Android.
 
 ---
 
-## 🛠 Utility Scripts (`scripts/`)
+## Utility Scripts (`scripts/`)
 
 This folder contains helper scripts for development, testing, and debugging.
 
@@ -78,7 +78,7 @@ These scripts simulate user interactions to verify that specific features are wo
 - **`verify_fix.py`**: A regression test script used to verify specific bug fixes related to previous development cycles.
 - **`verify_revert.py`**: A script used to verify that state can be reverted or cleaned up after testing.
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Set up MySQL Database**:
    ```sql
