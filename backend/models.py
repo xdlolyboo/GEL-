@@ -25,10 +25,12 @@ class User(db.Model):
     User model representing a registered user in the system.
     Stores authentication details and relationships to other entities.
     """
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4'}
+    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)  # 255 for werkzeug hashes
     is_active = db.Column(db.Boolean, default=True)
     
     # Relationships
@@ -72,6 +74,8 @@ class ScheduleItem(db.Model):
     Represents a single class/course block in a user's weekly schedule.
     Used to determine if a user is 'In Class' or 'Free'.
     """
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4'}
+    
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     day_of_week = db.Column(db.Integer, nullable=False) # 0=Monday, 6=Sunday
@@ -94,6 +98,8 @@ class Notification(db.Model):
     Represents an invite/notification sent from one user to another.
     Includes the location where the sender is inviting the receiver.
     """
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4'}
+    
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -117,6 +123,8 @@ class FriendRequest(db.Model):
     Represents a pending friend request between two users.
     Once accepted, a mutual follow relationship is created in the User model.
     """
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4'}
+    
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -141,6 +149,8 @@ class VerificationCode(db.Model):
     """
     Stores email verification codes temporarily.
     """
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4'}
+    
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     code = db.Column(db.String(6), nullable=False)

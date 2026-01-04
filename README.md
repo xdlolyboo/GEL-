@@ -19,7 +19,7 @@ A comprehensive application for managing schedules, notifications, and user stat
 
 The backend handles data persistence, authentication, and AI processing.
 
-- **Technology Stack**: Python, Flask, SQLAlchemy (SQLite), Flask-JWT-Extended, Google Gemini AI.
+- **Technology Stack**: Python, Flask, SQLAlchemy (MySQL 8.0+), Flask-JWT-Extended, Google Gemini AI.
 - **Key Files**:
     - **`app.py`**: The entry point of the application. It initializes the Flask app, database connection, and registers API routes.
     - **`config.py`**: Contains configuration settings like secret keys and database URIs.
@@ -58,7 +58,7 @@ This folder contains helper scripts for development, testing, and debugging.
 
 ### General Utilities
 - **`serve_apps.sh`**: A Bash script that starts both the Frontend and Mobile web servers in parallel. Useful for quickly spinning up the client-side apps.
-- **`init_db.py`**: Initializes the SQLite database. Run this once to create the necessary tables (`smoke_break.db`) defined in `models.py`.
+- **`init_db.py`**: Initializes the database. Run this once to create the necessary tables defined in `models.py`.
 
 ### Debugging & AI
 - **`debug_ai.py`**: A standalone script to test the Google Gemini integration. It sends a sample image to the AI service and prints the parsed JSON result. Use this to verify if the AI API key is working and parsing correctly.
@@ -80,11 +80,31 @@ These scripts simulate user interactions to verify that specific features are wo
 
 ## 🚀 Getting Started
 
-1. **Start the Backend**:
+1. **Set up MySQL Database**:
+   ```sql
+   CREATE DATABASE smoke_break CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE USER 'smokebreak'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON smoke_break.* TO 'smokebreak'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+
+2. **Configure Environment**:
+   Copy `.env.example` to `.env` and update `DATABASE_URL`:
+   ```
+   DATABASE_URL=mysql+pymysql://smokebreak:your_password@localhost:3306/smoke_break?charset=utf8mb4
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Start the Backend**:
    ```bash
    python -m backend.app
    ```
-2. **Start the Clients**:
+
+5. **Start the Clients**:
    ```bash
    ./scripts/serve_apps.sh
    ```

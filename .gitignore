@@ -30,3 +30,6 @@ tunnel.log
 
 # Uploads
 uploads/
+
+# Node
+node_modules/

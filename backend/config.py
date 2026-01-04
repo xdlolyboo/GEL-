@@ -15,6 +15,12 @@ class Config:
     # Disable modification tracking to save memory
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
+    # MySQL-specific connection pool options (ignored for SQLite)
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True,      # Verify connections before use
+        'pool_recycle': 3600,       # Recycle connections after 1 hour
+    }
+    
     # Secret key for signing JWT tokens
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'jwt-secret-key-change-in-prod'
     
